@@ -52,8 +52,5 @@ Frontend runs on `http://localhost:5173` (proxies `/api/*` to `http://localhost:
 ### Voice Conversation and Appointment Confirmation
 ![Voice conversation showing the appointment confirmation](docs/screenshots/Capture.PNG)
 
-### Availability and Caller Verification Logs
-![Backend logs showing availability lookup and caller verification](docs/screenshots/user-ques.PNG)
-
-### Appointment Booking Logs
+### Caller Verification and Appointment Booking Logs
 ![Backend logs showing the appointment booking result](docs/screenshots/bookappo.PNG)
