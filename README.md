@@ -3,8 +3,8 @@
 Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD + ElevenLabs STT/TTS + Google Gemini `gemini-3.5-flash`) and a **React + Vite** dashboard.
 
 ## Quick Links
-- **Demo Video:** `[Add Demo Video Link Here]`
-- **Live Deployment:** `[Add Deployment Link Here]`
+- **Demo Video:** [CLICK HERE](https://youtu.be/nDAlIelKteU)
+- **Live Deployment:** [CLICK HERE](https://voice-appointment-assistant.vercel.app/)
 
 ## Features
 - **Real-Time Voice Receptionist:** Natural, low-latency voice conversations over WebRTC with Silero VAD turn detection and interruption handling.
