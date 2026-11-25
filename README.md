@@ -6,6 +6,8 @@ Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD
 - **Demo Video:** [CLICK HERE](https://youtu.be/nDAlIelKteU)
 - **Live Deployment:** [CLICK HERE](https://voice-appointment-assistant.vercel.app/)
 
+> <img width="948" height="412" alt="dashboard" src="https://github.com/user-attachments/assets/7457ee03-6706-44fa-9890-79f18c4d15c3" />
+
 ## Features
 - **Real-Time Voice Receptionist:** Natural, low-latency voice conversations over WebRTC with Silero VAD turn detection and interruption handling.
 - **Phone-Only Caller Verification:** Identifies callers solely by their spoken phone number and reads it back digit-by-digit for explicit `"yes"` confirmation before booking or cancelling.
