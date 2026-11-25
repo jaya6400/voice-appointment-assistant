@@ -1,6 +1,6 @@
 # CarePulse — Voice AI Doctor Appointment Assistant
 
-Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD + ElevenLabs STT/TTS + Google Gemini `gemini-2.5-flash`) and a **React + Vite** dashboard.
+Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD + ElevenLabs STT/TTS + Google Gemini `gemini-3.5-flash`) and a **React + Vite** dashboard.
 
 ## Quick Links
 - **Demo Video:** `[Add Demo Video Link Here]`
@@ -17,7 +17,7 @@ Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD
 - **Voice Framework:** Pipecat (`pipecat-ai==1.17.0`) with `SmallWebRTCTransport` & `RTVIProcessor`
 - **VAD:** Silero VAD (`SileroVADAnalyzer`)
 - **STT & TTS:** ElevenLabs (`ElevenLabsSTTService`, `ElevenLabsTTSService`)
-- **LLM:** Google Gemini (`gemini-2.5-flash` via `GoogleLLMService` with function calling)
+- **LLM:** Google Gemini (`gemini-3.5-flash` via `GoogleLLMService` with function calling, bounded stream retry, and spoken timeout recovery)
 - **Backend:** FastAPI + Uvicorn + in-memory JSON store (`backend/data.json`)
 - **Frontend:** React + Vite + `@pipecat-ai/client-js` + `@pipecat-ai/small-webrtc-transport`
 
@@ -25,7 +25,7 @@ Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD
 
 ### API Keys Required (`backend/.env`)
 - `ELEVENLABS_API_KEY` — Used by Pipecat's `ElevenLabsSTTService` (speech-to-text) and `ElevenLabsTTSService` (text-to-speech) for real-time voice transcription and synthesis.
-- `GOOGLE_API_KEY` — Used by `GoogleLLMService` (`gemini-2.5-flash`) to power conversational reasoning and function calling (`check_doctor_availability`, `book_appointment`, `cancel_appointment`).
+- `GOOGLE_API_KEY` — Used by `GoogleLLMService` (`gemini-3.5-flash`) to power conversational reasoning and function calling (`check_doctor_availability`, `book_appointment`, `cancel_appointment`).
 - `ELEVENLABS_VOICE_ID` *(optional)* — Overrides the default free-tier compatible voice (`EXAVITQu4vr4xnSDxMaL` — Sarah).
 
 ### 1. Backend
@@ -47,7 +47,11 @@ npm install && npm run dev
 Frontend runs on `http://localhost:5173` (proxies `/api/*` to `http://localhost:7860`).
 
 ## Screenshots
-- **Voice Agent Screen (`/chat`)**:
-  `![Voice Agent Screen](path/to/voice-agent-screenshot.png)`
-- **Backend & Frontend Terminal Logs**:
-  `![Terminal Logs](path/to/terminal-logs-screenshot.png)`
+### Voice Conversation and Appointment Confirmation
+![Voice conversation showing the appointment confirmation](docs/screenshots/Capture.PNG)
+
+### Availability and Caller Verification Logs
+![Backend logs showing availability lookup and caller verification](docs/screenshots/user-ques.PNG)
+
+### Appointment Booking Logs
+![Backend logs showing the appointment booking result](docs/screenshots/bookappo.PNG)

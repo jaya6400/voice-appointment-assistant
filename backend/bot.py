@@ -7,7 +7,7 @@ from loguru import logger
 from pipecat.adapters.llm.schemas.function_schema import FunctionSchema
 from pipecat.adapters.llm.schemas.tools_schema import ToolsSchema
 from pipecat.audio.vad.silero import SileroVADAnalyzer
-from pipecat.frames.frames import LLMRunFrame
+from pipecat.frames.frames import ErrorFrame, LLMRunFrame, TTSSpeakFrame
 from pipecat.pipeline.pipeline import Pipeline
 from pipecat.pipeline.runner import PipelineRunner
 from pipecat.pipeline.task import PipelineParams, PipelineTask
@@ -43,6 +43,11 @@ def _build_system_prompt() -> str:
         "You can handle checking availability, booking, and cancelling in the same conversation. "
         "If a slot is taken or no appointment is found for their number, explain kindly and offer the next best option."
     )
+
+
+def _is_transient_llm_error(frame: ErrorFrame) -> bool:
+    error_details = f"{frame.error} {frame.exception or ''}".upper()
+    return any(marker in error_details for marker in ("TIMEOUT", "503", "UNAVAILABLE"))
 
 
 def _create_tools() -> ToolsSchema:
@@ -135,13 +140,16 @@ async def run_bot(webrtc_connection: SmallWebRTCConnection) -> None:
         )
 
         llm = GoogleLLMService(
-            api_key=google_api_key,
-            settings=GoogleLLMService.Settings(
-                model="gemini-2.5-flash",
-                system_instruction=_build_system_prompt(),
-                temperature=0.4,
-            ),
-        )
+        api_key=google_api_key,
+        stream_idle_timeout_secs=60.0,
+        retry_timeout_secs=30.0,
+        retry_on_timeout=True,
+        settings=GoogleLLMService.Settings(
+            model="gemini-3.6-flash",
+            system_instruction=_build_system_prompt(),
+            temperature=0.4,
+        ),
+       )
 
         async def handle_check_availability(params: FunctionCallParams) -> None:
             args = params.arguments
@@ -228,6 +236,19 @@ async def run_bot(webrtc_connection: SmallWebRTCConnection) -> None:
             ),
             observers=[RTVIObserver(rtvi)],
         )
+
+        @task.event_handler("on_pipeline_error")
+        async def on_pipeline_error(_task, frame: ErrorFrame) -> None:
+            if frame.processor is not llm or not _is_transient_llm_error(frame):
+                return
+
+            logger.warning("Gemini request timed out or is temporarily unavailable.")
+            await task.queue_frame(
+                TTSSpeakFrame(
+                    "Sorry, I'm having a brief connection hiccup. Could you repeat that for me?",
+                    append_to_context=False,
+                )
+            )
 
         @rtvi.event_handler("on_client_ready")
         async def on_client_ready(rtvi_proc):
