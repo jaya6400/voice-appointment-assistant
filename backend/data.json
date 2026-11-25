@@ -1,0 +1,106 @@
+{
+  "doctors": [
+    {
+      "id": "doc_1",
+      "name": "Dr. Sarah Chen",
+      "speciality": "Cardiology",
+      "slots": [
+        "2026-11-26 09:30 AM",
+        "2026-11-26 11:00 AM",
+        "2026-11-26 03:00 PM",
+        "2026-11-27 10:00 AM",
+        "2026-11-27 02:30 PM",
+        "2026-11-28 09:00 AM"
+      ]
+    },
+    {
+      "id": "doc_2",
+      "name": "Dr. Arjun Mehta",
+      "speciality": "Dermatology",
+      "slots": [
+        "2026-11-26 10:00 AM",
+        "2026-11-26 01:30 PM",
+        "2026-11-26 04:00 PM",
+        "2026-11-27 09:30 AM",
+        "2026-11-27 03:30 PM",
+        "2026-11-28 11:30 AM"
+      ]
+    },
+    {
+      "id": "doc_3",
+      "name": "Dr. Emily Brooks",
+      "speciality": "Pediatrics",
+      "slots": [
+        "2026-11-26 09:00 AM",
+        "2026-11-26 12:00 PM",
+        "2026-11-27 11:00 AM",
+        "2026-11-27 04:00 PM",
+        "2026-11-28 10:00 AM",
+        "2026-11-28 02:00 PM"
+      ]
+    },
+    {
+      "id": "doc_4",
+      "name": "Dr. Vikram Rao",
+      "speciality": "Orthopedics",
+      "slots": [
+        "2026-11-26 10:30 AM",
+        "2026-11-26 02:00 PM",
+        "2026-11-27 09:00 AM",
+        "2026-11-27 01:00 PM",
+        "2026-11-28 10:30 AM",
+        "2026-11-28 03:30 PM"
+      ]
+    },
+    {
+      "id": "doc_5",
+      "name": "Dr. Priya Nair",
+      "speciality": "Cardiology",
+      "slots": [
+        "2026-11-26 11:30 AM",
+        "2026-11-26 04:30 PM",
+        "2026-11-27 10:30 AM",
+        "2026-11-28 01:30 PM",
+        "2026-11-28 04:00 PM"
+      ]
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_1001",
+      "phone_number": "9876543210",
+      "doctor_id": "doc_1",
+      "doctor_name": "Dr. Sarah Chen",
+      "speciality": "Cardiology",
+      "date": "2026-11-26",
+      "time": "08:30 AM",
+      "slot": "2026-11-26 08:30 AM",
+      "status": "booked",
+      "updated_at": "2026-11-25T18:15:00+05:30"
+    },
+    {
+      "id": "apt_1002",
+      "phone_number": "9123456780",
+      "doctor_id": "doc_2",
+      "doctor_name": "Dr. Arjun Mehta",
+      "speciality": "Dermatology",
+      "date": "2026-11-26",
+      "time": "11:30 AM",
+      "slot": "2026-11-26 11:30 AM",
+      "status": "booked",
+      "updated_at": "2026-11-25T18:30:00+05:30"
+    },
+    {
+      "id": "apt_1003",
+      "phone_number": "9988776655",
+      "doctor_id": "doc_3",
+      "doctor_name": "Dr. Emily Brooks",
+      "speciality": "Pediatrics",
+      "date": "2026-11-27",
+      "time": "09:30 AM",
+      "slot": "2026-11-27 09:30 AM",
+      "status": "cancelled",
+      "updated_at": "2026-11-25T19:00:00+05:30"
+    }
+  ]
+}
