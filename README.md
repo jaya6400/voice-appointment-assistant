@@ -2,6 +2,17 @@
 
 Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD + ElevenLabs STT/TTS + Google Gemini `gemini-2.5-flash`) and a **React + Vite** dashboard.
 
+## Quick Links
+- **Demo Video:** `[Add Demo Video Link Here]`
+- **Live Deployment:** `[Add Deployment Link Here]`
+
+## Features
+- **Real-Time Voice Receptionist:** Natural, low-latency voice conversations over WebRTC with Silero VAD turn detection and interruption handling.
+- **Phone-Only Caller Verification:** Identifies callers solely by their spoken phone number and reads it back digit-by-digit for explicit `"yes"` confirmation before booking or cancelling.
+- **End-to-End Appointment Tools:** Checks doctor availability by name, speciality, or date, books open slots, and cancels existing appointments in a single conversation.
+- **Live Synced Dashboard:** Displays doctors, available slot chips, summary metrics, and an appointments table that polls and highlights newly booked or cancelled rows in real time.
+- **Voice + Text Chat Screen:** ChatGPT-style voice interface with an audio-reactive orb, full live transcript bubbles, mute/end controls, and typed message support.
+
 ## Tech Stack
 - **Voice Framework:** Pipecat (`pipecat-ai==1.17.0`) with `SmallWebRTCTransport` & `RTVIProcessor`
 - **VAD:** Silero VAD (`SileroVADAnalyzer`)
@@ -10,7 +21,12 @@ Real-time voice AI receptionist built with **Pipecat** (SmallWebRTC + Silero VAD
 - **Backend:** FastAPI + Uvicorn + in-memory JSON store (`backend/data.json`)
 - **Frontend:** React + Vite + `@pipecat-ai/client-js` + `@pipecat-ai/small-webrtc-transport`
 
-## Setup & Run (5 Commands)
+## Setup & Run
+
+### API Keys Required (`backend/.env`)
+- `ELEVENLABS_API_KEY` — Used by Pipecat's `ElevenLabsSTTService` (speech-to-text) and `ElevenLabsTTSService` (text-to-speech) for real-time voice transcription and synthesis.
+- `GOOGLE_API_KEY` — Used by `GoogleLLMService` (`gemini-2.5-flash`) to power conversational reasoning and function calling (`check_doctor_availability`, `book_appointment`, `cancel_appointment`).
+- `ELEVENLABS_VOICE_ID` *(optional)* — Overrides the default free-tier compatible voice (`EXAVITQu4vr4xnSDxMaL` — Sarah).
 
 ### 1. Backend
 ```bash
@@ -30,10 +46,8 @@ npm install && npm run dev
 ```
 Frontend runs on `http://localhost:5173` (proxies `/api/*` to `http://localhost:7860`).
 
-## 3-Minute Demo Video Script
-1. **Dashboard Overview (`/`)**: Show the 5 doctors, available slots, stat cards, and existing appointments.
-2. **Start Voice Call**: Click the **mic/waveform icon** inside the search bar (or **Start Voice Call**). It navigates to `/chat` and auto-connects.
-3. **Check Availability**: Say *"Hi, I'd like to check cardiology availability for tomorrow."* Agent offers 2–3 slots for Dr. Sarah Chen / Dr. Priya Nair.
-4. **Book Appointment + Phone Confirmation**: Say *"Book Dr. Sarah Chen at 9:30 AM. My phone number is 9876543210."* Agent reads back the digits *"nine eight seven, six five four, three two one zero"* and asks for *"yes"*. Say *"Yes."*
-5. **Live Dashboard Update**: Click the **Back arrow** (call stays active) or end the call. On `/`, the new booking row highlights in the Appointments table and the stat cards update.
-6. **Optional Cancel**: Ask the agent *"Actually, cancel my appointment for 9876543210"* -> confirm *"Yes"* -> watch the row update to `cancelled` and the slot return to the doctor's available chips.
+## Screenshots
+- **Voice Agent Screen (`/chat`)**:
+  `![Voice Agent Screen](path/to/voice-agent-screenshot.png)`
+- **Backend & Frontend Terminal Logs**:
+  `![Terminal Logs](path/to/terminal-logs-screenshot.png)`

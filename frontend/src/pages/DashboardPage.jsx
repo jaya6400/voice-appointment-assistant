@@ -120,9 +120,9 @@ export default function DashboardPage() {
           <section className="greeting-banner">
             <div className="greeting-text">
               <h1>
-                Good Morning, <span className="accent-name">Dr. Smith</span>
+                Good Morning, <span className="accent-name">CarePulse</span>
               </h1>
-              <p>Have a nice day at the clinic</p>
+              <p>Book, check, or cancel your doctor appointment by voice</p>
             </div>
             <div className="greeting-art" aria-hidden="true">
               <div className="art-circle art-c1" />

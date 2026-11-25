@@ -196,19 +196,23 @@ export function VoiceProvider({ children }) {
           },
           onBotOutput: (data) => {
             if (!data?.text) return;
+            const chunk = data.text.trim();
+            if (!chunk) return;
             setMessages((prev) => {
               const idx = botStreamIndexRef.current;
               if (idx !== null && prev[idx] && prev[idx].role === 'bot') {
                 const updated = [...prev];
+                const existing = updated[idx].text;
+                if (existing.endsWith(chunk)) return prev;
                 updated[idx] = {
                   ...updated[idx],
-                  text: data.text,
+                  text: existing ? `${existing} ${chunk}` : chunk,
                 };
                 return updated;
               }
               const next = [
                 ...prev,
-                { id: `b_${Date.now()}_${Math.random()}`, role: 'bot', text: data.text },
+                { id: `b_${Date.now()}_${Math.random()}`, role: 'bot', text: chunk },
               ];
               botStreamIndexRef.current = next.length - 1;
               return next;
